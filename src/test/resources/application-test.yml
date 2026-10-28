@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:ticketbookingtest;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  autoconfigure:
+    exclude:
+      - org.redisson.spring.starter.RedissonAutoConfiguration
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+app:
+  jwt:
+    secret: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+    access-token-expiration-ms: 60000
+    refresh-token-expiration-ms: 3600000
+  booking:
+    hold-ttl-seconds: 600
+    lock-wait-seconds: 3
+    lock-lease-seconds: 10
+  rabbitmq:
+    exchange: ticket.booking.exchange
+    queue: ticket.booking.queue
+    routing-key: ticket.booking.routingKey
+    dlq-exchange: ticket.dlq.exchange
+    dlq-queue: ticket.dlq.queue
